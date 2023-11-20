@@ -1,4 +1,4 @@
-describe('Registration process', () => {
+describe('Re-registration process', () => {
   it('assertion of error message when re-registering the same user', () => {
     cy.visit('https://magento.softwaretestingboard.com/')
 
