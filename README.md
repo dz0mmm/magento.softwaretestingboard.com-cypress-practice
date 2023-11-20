@@ -13,24 +13,3 @@ To install Cypress, follow these steps:
 2. Navigate to the project directory.
 3. Run Cypress tests using the command: `npx cypress open`.
 
-4. ## Folder Structure
-Project/
-├── cypress/
-│ ├── e2e/
-│ │ ├── [LoggedIn]user-account-actions.cy.js
-│ │ ├── [Login]account-login.cy.js
-│ │ ├── [Register]account-registration.cy.js
-│ │ └── [Register]re-account-registration.cy.js
-│ ├── fixtures/
-│ │ └── example.json
-│ ├── support/
-│ │ ├── commands.js
-│ │ └── e2e.js
-├── node_modules/
-│ │ └── ...
-├── .gitignore
-├── cypress.config.js
-├── jsconfig.json
-├── package-lock.json
-├── package.json
-└── README.md
