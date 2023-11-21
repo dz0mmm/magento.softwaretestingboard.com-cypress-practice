@@ -1,15 +1,36 @@
-# Cypress Test Suite for https://magento.softwaretestingboard.com/ by Daniel Zommer
+# Cypress Tests for [https://magento.softwaretestingboard.com/] by Daniel Zommer
 
 ## Installation
-To install Cypress, follow these steps:
-1. Clone this repository to your local machine 
-2. Install Cypress using the command: `npm install cypress --save-dev`.
-3. If you have Cypress installed on your computer, then use: `npm install`.
-4. Ensure all dependencies are installed correctly.
+To set up and run Cypress tests locally, follow these steps:
+
+1. **Clone Repository:** Clone this repository to your local machine.
+   
+2. **Install Cypress:**
+   - Install Cypress by running the following command in your terminal:
+     ```bash
+     npm install cypress --save-dev
+     ```
+   - If you already have Cypress installed, use:
+     ```bash
+     npm install
+     ```
+   Ensure all dependencies are correctly installed.
+
+3. **Additional Dependencies:**
+   - Check and review the `commands.js` and `cypress.config.js` files for any custom commands, configurations, or environment setup required for your tests.
 
 ## Setup Instructions
-### Running tests locally
-1. Open a terminal.
-2. Navigate to the project directory.
-3. Run Cypress tests using the command: `npx cypress open`.
+### Running Tests Locally
+To run tests locally:
+
+1. **Open Terminal:**
+   Open a terminal or command prompt.
+
+2. **Navigate to Project Directory:**
+   Navigate to the directory where this project/repository is cloned.
+
+3. **Launch Cypress:**
+   Run the following command to launch Cypress:
+   ```bash
+   npx cypress open
 
