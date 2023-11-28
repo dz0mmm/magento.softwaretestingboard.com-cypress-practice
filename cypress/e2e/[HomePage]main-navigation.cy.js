@@ -1,95 +1,62 @@
 describe('Main navigation actions', () => {
-  it('Checking the function of the buttons "Whats New", "Women", "Men", "Gear", "Training" and "Sale"', () => {
-    cy.visit('/')
-
-    //[Button]What's New
-    cy.get('#ui-id-3').should('have.text', "What's New").click();
-    cy.url().should('include', '/what-is-new.html');
+  const navigateAndVerify = (buttonSelector, expectedText, targetUrl) => {
+    cy.get(buttonSelector).should('have.text', expectedText).click({ force: true });
+    cy.url().should('include', targetUrl)
     cy.go('back');
+  };
 
-    //[Button]Women
-    cy.get('#ui-id-4').should('have.text', 'Women').realHover();
-    cy.get('#ui-id-9 > span:nth-child(2)').should('have.text', 'Tops').realHover();
-    cy.get('#ui-id-11').should('have.text', 'Jackets').click();
-    cy.url().should('include', '/women/tops-women/jackets-women.html');
+  const hoverAndVerifySubMenu = (mainButtonSelector, subMenuSelector, subMenuText, targetUrl) => {
+    cy.get(mainButtonSelector).realHover();
+    cy.get(subMenuSelector).should('have.text', subMenuText).click({ force: true });
+    cy.url().should('include', targetUrl);
+  };
 
-    cy.get('#ui-id-4').should('have.text', 'Women').realHover();
-    cy.get('#ui-id-9 > span:nth-child(2)').should('have.text', 'Tops').realHover();
-    cy.get('#ui-id-12').should('have.text', 'Hoodies & Sweatshirts').click({ force: true });
-    cy.url().should('include', '/women/tops-women/hoodies-and-sweatshirts-women.html');
+  beforeEach(() => {
+    cy.visit('/');
+  });
 
-    cy.get('#ui-id-4').should('have.text', 'Women').realHover();
-    cy.get('#ui-id-9 > span:nth-child(2)').should('have.text', 'Tops').realHover();
-    cy.get('#ui-id-13').should('have.text', 'Tees').click({ force: true });
-    cy.url().should('include', '/women/tops-women/tees-women.html');
+  it('check the function of the "Whats New" button', () => {
+    navigateAndVerify('#ui-id-3', "What's New", '/what-is-new.html')
+  });
 
-    cy.get('#ui-id-4').should('have.text', 'Women').realHover();
-    cy.get('#ui-id-9 > span:nth-child(2)').should('have.text', 'Tops').realHover();
-    cy.get('#ui-id-14').should('have.text', 'Bras & Tanks').click({ force: true });
-    cy.url().should('include', '/women/tops-women/tanks-women.html');
+  it('checks submenu items under "Women button', () => {
+    const womenButton = '#ui-id-4'
+    hoverAndVerifySubMenu(womenButton, '#ui-id-11', 'Jackets', '/women/tops-women/jackets-women.html');
+    hoverAndVerifySubMenu(womenButton, '#ui-id-12', 'Hoodies & Sweatshirts', '/women/tops-women/hoodies-and-sweatshirts-women.html');
+    hoverAndVerifySubMenu(womenButton, '#ui-id-13', 'Tees', '/women/tops-women/tees-women.html');
+    hoverAndVerifySubMenu(womenButton, '#ui-id-14', 'Bras & Tanks', '/women/tops-women/tanks-women.html');
+    hoverAndVerifySubMenu(womenButton, '#ui-id-15', 'Pants', '/women/bottoms-women/pants-women.html');
+    hoverAndVerifySubMenu(womenButton, '#ui-id-16', 'Shorts', '/women/bottoms-women/shorts-women.html');
+  });
 
-    cy.get('#ui-id-4').should('have.text', 'Women').realHover();
-    cy.get('#ui-id-10 > span:nth-child(2)').should('have.text', 'Bottoms').realHover();
-    cy.get('#ui-id-15').should('have.text', 'Pants').click({ force: true });
-    cy.url().should('include', '/women/bottoms-women/pants-women.html');
+  it('checks submenu items under "Men" button', () => {
+    const menButton = '#ui-id-5'
+    hoverAndVerifySubMenu(menButton, '#ui-id-19', 'Jackets', '/men/tops-men/jackets-men.html');
+    hoverAndVerifySubMenu(menButton, '#ui-id-20', 'Hoodies & Sweatshirts', '/men/tops-men/hoodies-and-sweatshirts-men.html');
+    hoverAndVerifySubMenu(menButton, '#ui-id-21', 'Tees', '/men/tops-men/tees-men.html');
+    hoverAndVerifySubMenu(menButton, '#ui-id-22', 'Tanks', '/men/tops-men/tanks-men.html');
+    hoverAndVerifySubMenu(menButton, '#ui-id-23', 'Pants', '/pants-men.html');
+    hoverAndVerifySubMenu(menButton, '#ui-id-24', 'Shorts', '/men/bottoms-men/shorts-men.html');
 
-    cy.get('#ui-id-4').should('have.text', 'Women').realHover();
-    cy.get('#ui-id-10 > span:nth-child(2)').should('have.text', 'Bottoms').realHover();
-    cy.get('#ui-id-16').should('have.text', 'Shorts').click({ force: true });
-    cy.url().should('include', '/women/bottoms-women/shorts-women.html');
+    hoverAndVerifySubMenu(menButton, '#ui-id-22', 'Tanks', '/men/tops-men/tanks-men.html');
+    hoverAndVerifySubMenu(menButton, '#ui-id-23', 'Pants', '/pants-men.html');
+    hoverAndVerifySubMenu(menButton, '#ui-id-24', 'Shorts', '/men/bottoms-men/shorts-men.html');
+  });
 
-    //[Button]Men
-    cy.get('#ui-id-5').should('have.text', 'Men').realHover();
-    cy.get('#ui-id-17 > span:nth-child(2)').should('have.text', 'Tops');
-    cy.get('#ui-id-19').should('have.text', 'Jackets').click({ force: true });
-    cy.url().should('include', '/men/tops-men/jackets-men.html');
+  it('checks submenu items under "Gear" button', () => {
+    const gearButton = '#ui-id-6'
+    hoverAndVerifySubMenu(gearButton, '#ui-id-25', 'Bags', '/gear/bags.html');
+    hoverAndVerifySubMenu(gearButton, '#ui-id-26', 'Fitness Equipment', '/gear/fitness-equipment.html');
+    hoverAndVerifySubMenu(gearButton, '#ui-id-27', 'Watches', '/gear/watches.html');
+  });
 
-    cy.get('#ui-id-5').should('have.text', 'Men').realHover();
-    cy.get('#ui-id-17 > span:nth-child(2)').should('have.text', 'Tops');
-    cy.get('#ui-id-20').should('have.text', 'Hoodies & Sweatshirts').click({ force: true });
-    cy.url().should('include', '/men/tops-men/hoodies-and-sweatshirts-men.html');
+  it('checks submenu items under "Training" button', () => {
+    const trainingButton = '#ui-id-7'
+    hoverAndVerifySubMenu(trainingButton, '#ui-id-28', 'Video Download', '/training/training-video.html');
+  });
 
-    cy.get('#ui-id-5').should('have.text', 'Men').realHover();
-    cy.get('#ui-id-17 > span:nth-child(2)').should('have.text', 'Tops');
-    cy.get('#ui-id-21').should('have.text', 'Tees').click({ force: true });
-    cy.url().should('include', '/men/tops-men/tees-men.html');
+  it('check the function of the "Sale" button', () => {
+    navigateAndVerify('#ui-id-8', 'Sale', '/sale.html')
+  });
 
-    cy.get('#ui-id-5').should('have.text', 'Men').realHover();
-    cy.get('#ui-id-17 > span:nth-child(2)').should('have.text', 'Tops');
-    cy.get('#ui-id-22').should('have.text', 'Tanks').click({ force: true });
-    cy.url().should('include', '/men/tops-men/tanks-men.html');
-
-    cy.get('#ui-id-5').should('have.text', 'Men').realHover();
-    cy.get('#ui-id-18 > span:nth-child(2)').should('have.text', 'Bottoms');
-    cy.get('#ui-id-23').should('have.text', 'Pants').click({ force: true });
-    cy.url().should('include', '/men/bottoms-men/pants-men.html');
-
-    cy.get('#ui-id-5').should('have.text', 'Men').realHover();
-    cy.get('#ui-id-18 > span:nth-child(2)').should('have.text', 'Bottoms')
-    cy.get('#ui-id-24').should('have.text', 'Shorts').click({ force: true });
-    cy.url().should('include', '/men/bottoms-men/shorts-men.html');
-
-    //[Button]Gear
-    cy.get('#ui-id-6').should('have.text', 'Gear').realHover();
-    cy.get('#ui-id-25').should('have.text', 'Bags').click({ force: true });
-    cy.url().should('include', '/gear/bags.html');
-
-    cy.get('#ui-id-6').should('have.text', 'Gear').realHover();
-    cy.get('#ui-id-26').should('have.text', 'Fitness Equipment').click({ force: true });
-    cy.url().should('include', '/gear/fitness-equipment.html');
-
-    cy.get('#ui-id-6').should('have.text', 'Gear').realHover();
-    cy.get('#ui-id-27').should('have.text', 'Watches').click({ force: true });
-    cy.url().should('include', '/gear/watches.html');
-
-    //[Button]Training
-    cy.get('#ui-id-7').should('have.text', 'Training').realHover();
-    cy.get('#ui-id-28').should('have.text', 'Video Download').click({ force: true });
-    cy.url().should('include', '/training/training-video.html');
-
-    //[Button]Sale
-    cy.get('#ui-id-8').should('have.text', 'Sale').click({force: true});
-    cy.url().should('include', '/sale.html');
-    cy.go('back');
-  })
-})
+});

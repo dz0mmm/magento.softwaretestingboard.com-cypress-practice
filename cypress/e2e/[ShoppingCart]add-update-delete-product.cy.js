@@ -1,9 +1,10 @@
 describe('Add, update and delete product', () => {
-  it('functionality of adding, updating and deleting a product', () => {
-    cy.visit('/')
-
+  beforeEach(() => {
+    cy.visit('/');
     cy.login('softwaretester0x0x@gmail.com', 'Test0x0x');
-
+  });
+  
+  it('functionality of adding, updating and deleting a product', () => {
     cy.get("body > div.page-wrapper > header > div.header.content > div.minicart-wrapper > a").click({ force: true });
     cy.url().should('include', '/checkout/cart/');
     cy.get("#maincontent > div.page-title-wrapper > h1 > span").should('have.text', 'Shopping Cart');
@@ -31,6 +32,5 @@ describe('Add, update and delete product', () => {
 
     cy.get("#maincontent > div.columns > div > div.cart-empty > p:nth-child(1)").should('have.text', 'You have no items in your shopping cart.');
     cy.get("#maincontent > div.columns > div > div.cart-empty > p:nth-child(2)").should('have.text', 'Click here to continue shopping. ');
-  })
-
-})
+  });
+});
