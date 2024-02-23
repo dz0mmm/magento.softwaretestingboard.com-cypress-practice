@@ -9,7 +9,7 @@
   "author": "Daniel Zommer",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^13.6.0"
+    "cypress": "^13.6.6"
   },
   "dependencies": {
     "cypress-real-events": "^1.11.0"
